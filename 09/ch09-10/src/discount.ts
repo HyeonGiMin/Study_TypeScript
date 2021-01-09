@@ -1,0 +1,16 @@
+import * as R from 'ramda'
+
+type NumtooNumFunc=(n:number)=>number
+const applyDiscount = (minimum:number,discount:number):NumtooNumFunc=>
+    R.pipe(
+        R.ifElse(
+            R.flip(R.gte)(minimum),
+            R.flip(R.subtract)(discount),
+            R.identity
+        ),
+        R.tap(amount=>console.log(amount))
+    )
+const calcPrice=applyDiscount(5000,500)
+
+const discountedPrice=calcPrice(6000)
+const notDiscountedPrice=calcPrice(4500)
