@@ -3,5 +3,5 @@ export interface IFake{
     email:string
     setence:string
     profession:string
-    birthdat:Date
+    birthday:Date
 }
