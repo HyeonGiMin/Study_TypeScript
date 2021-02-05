@@ -1,14 +1,23 @@
-import React , {useState} from 'react'
+import React , {useState,useEffect} from 'react'
 import {IUser} from './IUser'
 import {getDataPromise} from './getDataPromise'
 
 const App: React.FC=()=>{
+  const limit=1
+  const [skip,setSkip]=useState(0)
   const [users,setUsers] = useState<IUser[]>([])
-  getDataPromise((receivedUsers:IUser[])=>{
-    setUsers([...users,...receivedUsers])
-  })(0,1)
+  const onClick=()=>{
+      getDataPromise((receivedUsers:IUser[])=>{
+        setUsers([...users,...receivedUsers])
+      })(skip,limit)
+  }
+  useEffect(onClick,[])
+
   return (
-    <div className='App'>please open console window!</div>
+    <div className='App'>
+      <p><button onClick={onclick}>more data...</button></p>
+      <p>{JSON.stringify(users)}</p>
+    </div>
   )
 }
 
