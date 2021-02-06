@@ -4,5 +4,5 @@ export interface IUser{
     email:string
     sentence:string
     profession:string
-    birthdat:Date
+    birthday:Date
 }

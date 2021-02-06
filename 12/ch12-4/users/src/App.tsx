@@ -1,6 +1,8 @@
 import React , {useState,useEffect} from 'react'
 import {IUser} from './IUser'
 import {getDataPromise} from './getDataPromise'
+import {Card} from './Card'
+import './App.css'
 
 const App: React.FC=()=>{
   const limit=1
@@ -8,6 +10,7 @@ const App: React.FC=()=>{
   const [users,setUsers] = useState<IUser[]>([])
   const onClick=()=>{
       getDataPromise((receivedUsers:IUser[])=>{
+        setSkip(skip+limit)
         setUsers([...users,...receivedUsers])
       })(skip,limit)
   }
@@ -15,8 +18,7 @@ const App: React.FC=()=>{
 
   return (
     <div className='App'>
-      <p><button onClick={onclick}>more data...</button></p>
-      <p>{JSON.stringify(users)}</p>
+      {users.map((user:IUser,key:number)=>(<Card click={onClick} user={user} key={key.toString()}/>))}
     </div>
   )
 }
